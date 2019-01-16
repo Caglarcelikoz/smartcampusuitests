@@ -68,17 +68,17 @@ public class StepDefinitions {
     // COMPANIES
     @Then("I look for the CompaniesButton")
     public void i_Look_For_The_CompaniesButton(){
-        menuButton = webDriver.findElement(By.xpath("//*[@id=\"navbarMenu\"]/ul/li[2]/a"));
+        menuButton = webDriver.findElement(By.xpath("//*[@id=\"navbarMenu\"]/ul/li[1]/a"));
     }
-    @Then("I Click The EmployeesButton")
+    @Then("I Click The CompaniesButton")
     public void i_Click_the_CompaniesButton(){
         menuButton.click();
     }
-    @Then("I verify there is a companiesHeader")
+    @Then("I verify there is a CompaniesHeader")
     public void i_Verify_There_Is_A_CompaniesHeader(){
         header = webDriver.findElement(By.id("companiesHeader"));
     }
-    @Then("I check that the companiesHeader has the correct text")
+    @Then("I check that the CompaniesHeader has the correct text")
     public void i_Check_That_The_companiesHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Companies", header.getText());
 
