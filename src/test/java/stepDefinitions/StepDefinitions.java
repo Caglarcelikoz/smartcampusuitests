@@ -23,7 +23,7 @@ public class StepDefinitions {
     }
     @When("I Open localhost")
     public void i_Open_Local_Host(){
-        webDriver.get("http://localhost:8081");
+        webDriver.get("http://35.241.249.44");
     }
 
     // BUILDING
