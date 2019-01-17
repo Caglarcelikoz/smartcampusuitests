@@ -1,5 +1,6 @@
-Feature: Google Homepage
-  This feature verifies the functionality on Google Homepage
+@BuildingButton
+Feature: Building Button
+  This feature verifies that the Building Button directs the user to the BuildingsPage
 
   Scenario: Check that main elements on Google Homepage are displayed
     Given I launch Chrome browser
@@ -8,3 +9,4 @@ Feature: Google Homepage
     Then I Click The BuildingsButton
     Then I verify there is a buildingsHeader
     Then I check that the buildingsHeader has the correct text
+

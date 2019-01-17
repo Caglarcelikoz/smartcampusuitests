@@ -1,11 +1,10 @@
-package testRunner;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="resources/features", glue="stepDefinitions/StepDefinitions")
+@CucumberOptions(features="src/test/features") //tag kan ook toegevoegd worden om testen te filteren
 
 public class Runner {
 }
