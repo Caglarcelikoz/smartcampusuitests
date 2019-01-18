@@ -22,8 +22,8 @@ public class StepDefinitions {
     // GENERAL
     @Given("I launch Chrome browser")
     public void i_Launch_Chrome_Browser(){
-       //System.setProperty("webdriver.chrome.driver","C:\\Users\\caglarcelikoz\\Downloads\\chromedriver.exe");
-       System.setProperty("webdriver.chrome.driver","C:\\Users\\Windows\\Downloads\\chromedriver_win32\\chromedriver.exe");
+       System.setProperty("webdriver.chrome.driver","C:\\Users\\caglarcelikoz\\Downloads\\chromedriver.exe");
+       //System.setProperty("webdriver.chrome.driver","C:\\Users\\Windows\\Downloads\\chromedriver_win32\\chromedriver.exe");
 
 
         webDriver = new ChromeDriver();
