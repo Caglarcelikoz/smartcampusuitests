@@ -3,17 +3,22 @@ package stepDefinitions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.json.simple.JSONObject;
+import org.junit.After;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.IOException;
+
 public class StepDefinitions {
 
     WebDriver webDriver;
     WebElement menuButton;
     WebElement header;
+    int error;
     // GENERAL
     @Given("I launch Chrome browser")
     public void i_Launch_Chrome_Browser(){
@@ -43,7 +48,9 @@ public class StepDefinitions {
     @Then("I check that the buildingsHeader has the correct text")
             public void i_Check_That_The_BuildingsHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Buildings", header.getText());
-
+        if (header.getText().equals("Buildings")){
+            error=1;
+        }
     }
 
     // EMPLOYEES
@@ -81,6 +88,43 @@ public class StepDefinitions {
     @Then("I check that the CompaniesHeader has the correct text")
     public void i_Check_That_The_companiesHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Companies", header.getText());
+
+    }
+    @Then("save to testrail")
+    public void save() throws IOException, APIException {
+        APIClient client = new APIClient("https://pxl.testrail.com/");
+        client.setUser("caglar.celikoz@student.pxl.be");
+        client.setPassword("mlyA4v8xVPsMKUc/Fo.R-x9jBlbG02evy98aezcAy"); // api key testrail ipv persoonlijke wachtwoord
+
+        JSONObject c = (JSONObject) client.sendGet("get_case/3640");
+        System.out.println("Test voor: " + c.get("title"));
+
+        System.out.println();
+
+        c = (JSONObject) client.sendGet("get_user_by_email&email=caglar.celikoz@student.pxl.be");
+        System.out.println("Test uitgevord als: " + c.get("name"));
+        System.out.println(c.get("email"));
+        System.out.println(c.get("id"));
+
+        JSONObject obj = new JSONObject();
+
+        if(error == 0) {
+            // Er is geen error
+            obj.put("status_id", "1");
+            obj.put("defects", "/");
+        } else {
+            // Er is een error
+            obj.put("status_id", "5");
+
+        }
+
+        obj.put("version", "0.1");
+        obj.put("elapsed", "1s");
+        obj.put("assignedto_id", "13");
+        obj.put("comment", "Automatisch testen door selenium door caglar");
+
+        client.sendPost("add_result/6885", obj);
+
 
     }
 }
