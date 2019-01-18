@@ -10,3 +10,4 @@ Feature: Companies Button
     Then I Click The CompaniesButton
     Then I verify there is a CompaniesHeader
     Then I check that the CompaniesHeader has the correct text
+    Then I close the browser window
