@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3da58f66-1c7a-4487-a3bb-415136ee9b15" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/features/buildingsButton.feature" afterPath="$PROJECT_DIR$/src/test/features/buildingsButton.feature" />
-      <change beforePath="$PROJECT_DIR$/src/test/features/companiesButton.feature" afterPath="$PROJECT_DIR$/src/test/features/companiesButton.feature" />
-      <change beforePath="$PROJECT_DIR$/src/test/features/employeesButton.feature" afterPath="$PROJECT_DIR$/src/test/features/employeesButton.feature" />
-      <change beforePath="$PROJECT_DIR$/src/test/features/employeesSearchbox.feature" afterPath="$PROJECT_DIR$/src/test/features/employeesSearchbox.feature" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/StepDefinitions.java" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/StepDefinitions.java" />
+      <change beforePath="$PROJECT_DIR$/.gitignore.txt" afterPath="$PROJECT_DIR$/.gitignore.txt" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,11 +15,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="employeesSearchbox.feature" pinned="false" current-in-tab="true">
+      <file leaf-file-name="employeesSearchbox.feature" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/features/employeesSearchbox.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="117" lean-forward="true" selection-start-line="3" selection-start-column="80" selection-end-line="3" selection-end-column="117" />
+            <state relative-caret-position="294">
+              <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="590">
+              <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -89,6 +96,7 @@
         <option value="$PROJECT_DIR$/src/test/features/companiesButton.feature" />
         <option value="$PROJECT_DIR$/src/test/features/buildingsButton.feature" />
         <option value="$PROJECT_DIR$/src/test/features/employeesSearchbox.feature" />
+        <option value="$PROJECT_DIR$/.gitignore.txt" />
       </list>
     </option>
   </component>
@@ -128,6 +136,11 @@
             <path>
               <item name="SmartCampusUITests" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartCampusUITests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartCampusUITests" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartCampusUITests" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SmartCampusUITests" type="b2602c69:ProjectViewProjectNode" />
@@ -317,7 +330,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1548106529277</updated>
-      <workItem from="1548106534580" duration="779000" />
+      <workItem from="1548106534580" duration="1028000" />
     </task>
     <servers />
   </component>
@@ -336,7 +349,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="779000" />
+    <option name="totallyTimeSpent" value="1028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="3218" height="1318" extended-state="6" />
@@ -350,9 +363,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293617" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293617" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293617" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -420,8 +433,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/features/employeesSearchbox.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="117" lean-forward="true" selection-start-line="3" selection-start-column="80" selection-end-line="3" selection-end-column="117" />
+        <state relative-caret-position="294">
+          <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
           <folding />
         </state>
       </provider>
