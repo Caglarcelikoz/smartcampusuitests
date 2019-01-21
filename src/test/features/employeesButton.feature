@@ -1,4 +1,4 @@
-@EmployeesButton
+@Employees
 
 Feature: Employees Button
   This feature verifies that the Employees Button directs the user to the EmployeesPage

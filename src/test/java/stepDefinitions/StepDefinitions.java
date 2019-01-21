@@ -21,6 +21,7 @@ public class StepDefinitions {
     WebElement header;
     WebElement searchBox;
     WebElement table;
+    WebElement employeeFirstname;
     int error;
     // GENERAL
     @Given("I launch Chrome browser")
@@ -143,11 +144,17 @@ public class StepDefinitions {
 
     @Then("^I give in firstname:(.*)")
     public void iGiveInFirstnameJaakie(String firstname) {
-        searchBox.sendKeys(firstname);
+                searchBox.sendKeys(firstname);
     }
 
-    @Then("^I verify given firstname is in table$")
-    public void iVerifyGivenFirstnameIsInTable() {
+    @Then("I verify given firstname:(.*) is in table")
+    public void iVerifyGivenFirstnameIsInTable(String firstname) {
+       /* table = webDriver.findElement(By.id("employeeTable"));
+        table =table.findElement(By.id("1_First_Name"));
+        System.out.println(table.getText());*/
+
         table = webDriver.findElement(By.id("employeeTable"));
+        employeeFirstname =table.findElement(By.id("1_First_Name"));
+        Assert.assertEquals(firstname,employeeFirstname.getText());
     }
 }

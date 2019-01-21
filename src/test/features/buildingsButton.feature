@@ -1,4 +1,4 @@
-@BuildingButton
+@Building
 Feature: Building Button
   This feature verifies that the Building Button directs the user to the BuildingsPage
 

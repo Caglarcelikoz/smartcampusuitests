@@ -1,4 +1,4 @@
-@CompaniesButton
+@Companies
 
 Feature: Companies Button
   This feature verifies that the Companies Button directs the user to the CompaniesPage
