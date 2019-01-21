@@ -3,7 +3,7 @@
 Feature: Employees Button
   This feature verifies that the Employees Button directs the user to the EmployeesPage
 
-  Scenario: Check that main elements on Google Homepage are displayed
+  Scenario: Check the Employees Button directs the user to the EmployeesPage
     Given I launch Chrome browser
     When I Open localhost
     Then I look for the EmployeesButton
