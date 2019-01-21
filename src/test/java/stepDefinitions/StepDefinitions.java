@@ -147,9 +147,6 @@ public class StepDefinitions {
 
     @Then("I verify given firstname:(.*) is in table")
     public void iVerifyGivenFirstnameIsInTable(String firstname) {
-       /* table = webDriver.findElement(By.id("employeeTable"));
-        table =table.findElement(By.id("1_First_Name"));
-        System.out.println(table.getText());*/
 
         table = webDriver.findElement(By.id("employeeTable"));
         employeeFirstname =table.findElement(By.id("1_First_Name"));
