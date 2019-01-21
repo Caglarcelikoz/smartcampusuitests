@@ -10,3 +10,4 @@ Feature: Employees Button
     Then I Click The EmployeesButton
     Then I verify there is a employeesHeader
     Then I check that the employeesHeader has the correct text
+    Then I close the browser window

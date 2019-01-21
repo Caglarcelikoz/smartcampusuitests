@@ -10,4 +10,5 @@ Feature: Building Button
     Then I verify there is a buildingsHeader
     Then I check that the buildingsHeader has the correct text
     Then save to testrail
+    Then I close the browser window
 
