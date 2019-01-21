@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -18,12 +19,14 @@ public class StepDefinitions {
     WebDriver webDriver;
     WebElement menuButton;
     WebElement header;
+    WebElement searchBox;
+    WebElement table;
     int error;
     // GENERAL
     @Given("I launch Chrome browser")
     public void i_Launch_Chrome_Browser(){
-       //System.setProperty("webdriver.chrome.driver","C:\\Users\\caglarcelikoz\\Downloads\\chromedriver.exe");
-       System.setProperty("webdriver.chrome.driver","C:\\Users\\Windows\\Downloads\\chromedriver_win32\\chromedriver.exe");
+       System.setProperty("webdriver.chrome.driver","C:\\Users\\caglarcelikoz\\Downloads\\chromedriver.exe");
+       //System.setProperty("webdriver.chrome.driver","C:\\Users\\Windows\\Downloads\\chromedriver_win32\\chromedriver.exe");
         webDriver = new ChromeDriver();
     }
     @Then("I close the browser window")
@@ -131,5 +134,20 @@ public class StepDefinitions {
         client.sendPost("add_result/6885", obj);
 
 
+    }
+
+    @Then("^I verify there is a employeesSearchBox$")
+    public void iVerifyThereIsAEmployeesSearchBox() {
+        searchBox = webDriver.findElement(By.id("searchBarEmployees"));
+    }
+
+    @Then("^I give in firstname:(.*)")
+    public void iGiveInFirstnameJaakie(String firstname) {
+        searchBox.sendKeys(firstname);
+    }
+
+    @Then("^I verify given firstname is in table$")
+    public void iVerifyGivenFirstnameIsInTable() {
+        table = webDriver.findElement(By.id("employeeTable"));
     }
 }
