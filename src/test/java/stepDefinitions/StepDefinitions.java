@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,12 +21,15 @@ public class StepDefinitions {
     WebElement searchBox;
     WebElement table;
     WebElement employeeFirstname;
+    WebElement companyName;
+    WebElement smartCampusLogo;
+    WebElement restartButton;
     int error;
     // GENERAL
     @Given("I launch Chrome browser")
     public void i_Launch_Chrome_Browser(){
-       System.setProperty("webdriver.chrome.driver","C:\\Users\\caglarcelikoz\\Downloads\\chromedriver.exe");
-       //System.setProperty("webdriver.chrome.driver","C:\\Users\\Windows\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\caglarcelikoz\\Downloads\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver","C:\\Users\\Windows\\Downloads\\chromedriver_win32\\chromedriver.exe");
         webDriver = new ChromeDriver();
     }
     @Then("I close the browser window")
@@ -39,20 +43,20 @@ public class StepDefinitions {
 
     // BUILDING
     @Then("I look for the BuildingButton")
-            public void i_Look_For_The_BuildingButton(){
+    public void i_Look_For_The_BuildingButton(){
         menuButton = webDriver.findElement(By.xpath("//*[@id=\"navbarMenu\"]/ul/li[3]/a"));
     }
 
     @Then("I Click The BuildingsButton")
-            public void i_Click_the_BuildingsButton(){
+    public void i_Click_the_BuildingsButton(){
         menuButton.click();
     }
     @Then("I verify there is a buildingsHeader")
-            public void i_Verify_There_Is_A_BuildingsHeader(){
+    public void i_Verify_There_Is_A_BuildingsHeader(){
         header = webDriver.findElement(By.id("buildingsHeader"));
     }
     @Then("I check that the buildingsHeader has the correct text")
-            public void i_Check_That_The_BuildingsHeader_Has_The_Correct_Text(){
+    public void i_Check_That_The_BuildingsHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Buildings", header.getText());
         if (header.getText().equals("Buildings")){
             error=1;
@@ -142,7 +146,7 @@ public class StepDefinitions {
 
     @Then("^I give in firstname:(.*)")
     public void iGiveInFirstnameJaakie(String firstname) {
-                searchBox.sendKeys(firstname);
+        searchBox.sendKeys(firstname);
     }
 
     @Then("I verify given firstname:(.*) is in table")
@@ -151,5 +155,55 @@ public class StepDefinitions {
         table = webDriver.findElement(By.id("employeeTable"));
         employeeFirstname =table.findElement(By.id("1_First_Name"));
         Assert.assertEquals(firstname,employeeFirstname.getText());
+    }
+
+    @Then("^I verify there is a companiesSearchBox$")
+    public void iVerifyThereIsACompaniesSearchBox(){
+        searchBox = webDriver.findElement(By.id("searchBarCompanies"));
+    }
+
+    @Then("^I give in companyName (.*)$")
+    public void iGiveInCompanyNameCompanyName(String companyName){
+        searchBox.sendKeys(companyName);
+    }
+
+    @Then("^I verify given companyName (.*) is in table$")
+    public void iVerifyGivenCompanyNameCompanyNameIsInTable(String companyName){
+        table = webDriver.findElement(By.id("companyTable"));
+        this.companyName =table.findElement(By.id("1_Name"));
+        Assert.assertEquals(companyName,this.companyName.getText());
+    }
+
+    @Then("^I look for the Smart Campus logo$")
+    public void iLookForTheSmartCampusLogo() {
+        smartCampusLogo = webDriver.findElement(By.id("smartCordaLogo"));
+    }
+
+    @Then("^I Click The Smart Campus logo$")
+    public void iClickTheSmartCampusLogo(){
+       smartCampusLogo.click();
+    }
+
+    @Then("^I verify that I'm redirected to the home page$")
+    public void iVerifyThatIMRedirectedToTheHomePage(){
+        String URL = webDriver.getCurrentUrl();
+        Assert.assertEquals(URL, "http://35.241.249.44/chatbot" );
+    }
+
+    @Then("^I look for the restart button$")
+    public void iLookForTheRestartButton(){
+        restartButton = webDriver.findElement(By.id("restartButton"));
+    }
+
+    @Then("^I Click The restart button$")
+    public void iClickTheRestartButton() throws InterruptedException {
+        restartButton.click();
+    }
+
+    @Then("^I Verify That The CUI Shows A Welcome Message$")
+    public void iVerifyThatTheCUIShowsAWelcomeMessage() throws InterruptedException {
+        Thread.sleep(5000);
+        WebElement welcomeMessage = webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[1]/p"));
+        Assert.assertEquals("Hi there, I'm Charlie and I can help you get to your destination!",welcomeMessage.getText());
     }
 }
