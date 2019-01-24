@@ -3,7 +3,7 @@
 Feature: Companies SearchBox
   This feature verifies that the given companies name returns the correct data in the Companies table
 
-  Scenario: Check that given building name in SearchBox returns the correct data in companies table
+  Scenario Outline: Check that given building name in SearchBox returns the correct data in companies table
     Given I launch Chrome browser
     When I Open localhost
     Then I look for the CompaniesButton
@@ -13,8 +13,9 @@ Feature: Companies SearchBox
     Then I verify there is a companiesSearchBox
     Then I give in companyName <companyName>
     Then I verify given companyName <companyName> is in table
+    Then add to testrun <testCase>
     Then I close the browser window
 
   Examples:
-  |companyName|
-  |Xti        |
+  |companyName|testCase|
+  |Xti        |7166    |

@@ -24,6 +24,7 @@ public class StepDefinitions {
     WebElement companyName;
     WebElement smartCampusLogo;
     WebElement restartButton;
+    final String WELCOME_MESSAGE="Hi there, I'm Charlie and I can help you get to your destination!";
     int error;
     // GENERAL
     @Given("I launch Chrome browser")
@@ -58,9 +59,7 @@ public class StepDefinitions {
     @Then("I check that the buildingsHeader has the correct text")
     public void i_Check_That_The_BuildingsHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Buildings", header.getText());
-        if (header.getText().equals("Buildings")){
-            error=1;
-        }
+
     }
 
 
@@ -101,43 +100,6 @@ public class StepDefinitions {
         Assert.assertEquals("Companies", header.getText());
 
     }
-    @Then("save to testrail")
-    public void save() throws IOException, APIException {
-        APIClient client = new APIClient("https://pxl.testrail.com/");
-        client.setUser("caglar.celikoz@student.pxl.be");
-        client.setPassword("mlyA4v8xVPsMKUc/Fo.R-x9jBlbG02evy98aezcAy"); // api key testrail ipv persoonlijke wachtwoord
-
-        JSONObject c = (JSONObject) client.sendGet("get_case/3640");
-        System.out.println("Test voor: " + c.get("title"));
-
-        System.out.println();
-
-        c = (JSONObject) client.sendGet("get_user_by_email&email=caglar.celikoz@student.pxl.be");
-        System.out.println("Test uitgevord als: " + c.get("name"));
-        System.out.println(c.get("email"));
-        System.out.println(c.get("id"));
-
-        JSONObject obj = new JSONObject();
-
-        if(error == 0) {
-            // Er is geen error
-            obj.put("status_id", "1");
-            obj.put("defects", "/");
-        } else {
-            // Er is een error
-            obj.put("status_id", "5");
-
-        }
-
-        obj.put("version", "0.1");
-        obj.put("elapsed", "1s");
-        obj.put("assignedto_id", "13");
-        obj.put("comment", "Automatisch testen door selenium door caglar");
-
-        client.sendPost("add_result/6885", obj);
-
-
-    }
 
     @Then("^I verify there is a employeesSearchBox$")
     public void iVerifyThereIsAEmployeesSearchBox() {
@@ -155,6 +117,9 @@ public class StepDefinitions {
         table = webDriver.findElement(By.id("employeeTable"));
         employeeFirstname =table.findElement(By.id("1_First_Name"));
         Assert.assertEquals(firstname,employeeFirstname.getText());
+        if (!employeeFirstname.getText().equals(firstname)){
+            error=1;
+        }
     }
 
     @Then("^I verify there is a companiesSearchBox$")
@@ -172,6 +137,9 @@ public class StepDefinitions {
         table = webDriver.findElement(By.id("companyTable"));
         this.companyName =table.findElement(By.id("1_Name"));
         Assert.assertEquals(companyName,this.companyName.getText());
+        if (!this.companyName.getText().equals(companyName)){
+            error=1;
+        }
     }
 
     @Then("^I look for the Smart Campus logo$")
@@ -205,5 +173,72 @@ public class StepDefinitions {
         Thread.sleep(5000);
         WebElement welcomeMessage = webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[1]/p"));
         Assert.assertEquals("Hi there, I'm Charlie and I can help you get to your destination!",welcomeMessage.getText());
+        if (!welcomeMessage.getText().equals(WELCOME_MESSAGE)){
+            error=1;
+        }
+    }
+
+    @Then("^add to testrun (.*)$")
+    public void addToTestRun(String testCase) throws IOException, APIException {
+        APIClient client = new APIClient("https://pxl.testrail.com/");
+        client.setUser("caglar.celikoz@student.pxl.be");
+        client.setPassword("mlyA4v8xVPsMKUc/Fo.R-x9jBlbG02evy98aezcAy"); // api key testrail ipv persoonlijke wachtwoord
+
+        JSONObject obj = new JSONObject();
+
+        if(error == 0) {
+            // Er is geen error
+            obj.put("status_id", "1");
+            //obj.put("defects", "/");
+        } else {
+            // Er is een error
+            obj.put("status_id", "5");
+
+        }
+
+        obj.put("version", "0.1");
+        obj.put("elapsed", "1s");
+        obj.put("assignedto_id", "13");
+        obj.put("comment", "Automatisch testen door selenium door caglar");
+
+        client.sendPost("add_result/"+testCase, obj);
+
+    }
+    @Then("save to testrail")
+    public void save() throws IOException, APIException {
+        APIClient client = new APIClient("https://pxl.testrail.com/");
+        client.setUser("caglar.celikoz@student.pxl.be");
+        client.setPassword("mlyA4v8xVPsMKUc/Fo.R-x9jBlbG02evy98aezcAy"); // api key testrail ipv persoonlijke wachtwoord
+
+      /*  JSONObject c = (JSONObject) client.sendGet("get_case/3640");
+        System.out.println("Test voor: " + c.get("title"));
+
+        System.out.println();
+
+        c = (JSONObject) client.sendGet("get_user_by_email&email=caglar.celikoz@student.pxl.be");
+        System.out.println("Test uitgevord als: " + c.get("name"));
+        System.out.println(c.get("email"));
+        System.out.println(c.get("id"));*/
+
+        JSONObject obj = new JSONObject();
+
+        if(error == 0) {
+            // Er is geen error
+            obj.put("status_id", "1");
+            obj.put("defects", "/");
+        } else {
+            // Er is een error
+            obj.put("status_id", "5");
+
+        }
+
+        obj.put("version", "0.1");
+        obj.put("elapsed", "1s");
+        obj.put("assignedto_id", "13");
+        obj.put("comment", "Automatisch testen door selenium door caglar");
+
+        client.sendPost("add_result/6885", obj);
+
+
     }
 }
