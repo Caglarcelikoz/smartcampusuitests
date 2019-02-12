@@ -13,9 +13,10 @@ Feature: Employees SearchBox
     Then I verify there is a employeesSearchBox
     Then I give in firstname:Jaakie
     Then I verify given firstname:Jaakie is in table
-    Then add to testrun <testCase>
+    Then add to testrun <testRun> <testCase>
     Then I close the browser window
 
     Examples:
-    |testCase|
-    |7168    |
+    |testCase|testRun|
+    |4008    |193    |
+    |4008    |203    |

@@ -8,9 +8,10 @@ Feature: restartButton click
     Then I look for the restart button
     Then I Click The restart button
     Then I Verify That The CUI Shows A Welcome Message
-    Then add to testrun <testCase>
+    Then add to testrun <testRun> <testCase>
     Then I close the browser window
 
   Examples:
-  |testCase|
-  |7297    |
+  |testCase|testRun|
+  |4009    |193    |
+  |4009    |203    |

@@ -13,9 +13,11 @@ Feature: Companies SearchBox
     Then I verify there is a companiesSearchBox
     Then I give in companyName <companyName>
     Then I verify given companyName <companyName> is in table
-    Then add to testrun <testCase>
+    Then add to testrun <testRun> <testCase>
     Then I close the browser window
 
   Examples:
-  |companyName|testCase|
-  |Xti        |7166    |
+  |companyName|testCase|testRun|
+  |XTi        |4007    |193    |
+  |XTi        |4007    |203    |
+ # |ida mediafoundry        |4007    |203    |

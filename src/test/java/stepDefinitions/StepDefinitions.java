@@ -4,6 +4,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.lexer.Th;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -24,6 +25,8 @@ public class StepDefinitions {
     WebElement companyName;
     WebElement smartCampusLogo;
     WebElement restartButton;
+    WebElement categoryButtonCUI;
+    WebElement categoryMessageCUI;
     final String WELCOME_MESSAGE="Hi there, I'm Charlie and I can help you get to your destination!";
     int error;
     // GENERAL
@@ -98,12 +101,15 @@ public class StepDefinitions {
     @Then("I check that the CompaniesHeader has the correct text")
     public void i_Check_That_The_companiesHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Companies", header.getText());
-
+        if (!header.getText().equals("Companies")){
+            error=1;
+        }
     }
 
     @Then("^I verify there is a employeesSearchBox$")
-    public void iVerifyThereIsAEmployeesSearchBox() {
+    public void iVerifyThereIsAEmployeesSearchBox() throws InterruptedException {
         searchBox = webDriver.findElement(By.id("searchBarEmployees"));
+        Thread.sleep(2000);
     }
 
     @Then("^I give in firstname:(.*)")
@@ -128,16 +134,17 @@ public class StepDefinitions {
     }
 
     @Then("^I give in companyName (.*)$")
-    public void iGiveInCompanyNameCompanyName(String companyName){
+    public void iGiveInCompanyNameCompanyName(String companyName) throws InterruptedException {
         searchBox.sendKeys(companyName);
+        Thread.sleep(1000);
     }
 
     @Then("^I verify given companyName (.*) is in table$")
     public void iVerifyGivenCompanyNameCompanyNameIsInTable(String companyName){
         table = webDriver.findElement(By.id("companyTable"));
         this.companyName =table.findElement(By.id("1_Name"));
-        Assert.assertEquals(companyName,this.companyName.getText());
-        if (!this.companyName.getText().equals(companyName)){
+        Assert.assertEquals(companyName,this.companyName.getText()); //controle voor de test
+        if (!this.companyName.getText().equals(companyName)){ //controle voor testrail
             error=1;
         }
     }
@@ -164,22 +171,22 @@ public class StepDefinitions {
     }
 
     @Then("^I Click The restart button$")
-    public void iClickTheRestartButton() throws InterruptedException {
+    public void iClickTheRestartButton() {
         restartButton.click();
     }
 
     @Then("^I Verify That The CUI Shows A Welcome Message$")
     public void iVerifyThatTheCUIShowsAWelcomeMessage() throws InterruptedException {
         Thread.sleep(5000);
-        WebElement welcomeMessage = webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[1]/p"));
+        WebElement welcomeMessage = webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[1]/div/div[2]/div[1]/p"));
         Assert.assertEquals("Hi there, I'm Charlie and I can help you get to your destination!",welcomeMessage.getText());
         if (!welcomeMessage.getText().equals(WELCOME_MESSAGE)){
             error=1;
         }
     }
 
-    @Then("^add to testrun (.*)$")
-    public void addToTestRun(String testCase) throws IOException, APIException {
+    @Then("^add to testrun (.*) (.*)$")
+    public void addToTestRun(String testRun,String testCase) throws IOException, APIException, InterruptedException {
         APIClient client = new APIClient("https://pxl.testrail.com/");
         client.setUser("caglar.celikoz@student.pxl.be");
         client.setPassword("mlyA4v8xVPsMKUc/Fo.R-x9jBlbG02evy98aezcAy"); // api key testrail ipv persoonlijke wachtwoord
@@ -189,21 +196,23 @@ public class StepDefinitions {
         if(error == 0) {
             // Er is geen error
             obj.put("status_id", "1");
-            //obj.put("defects", "/");
+
         } else {
             // Er is een error
             obj.put("status_id", "5");
 
         }
-
+        obj.put("defects", "");//we laten die leeg zodat er via testrail een bug aangemaakt kan worden in Jira
         obj.put("version", "0.1");
         obj.put("elapsed", "1s");
-        obj.put("assignedto_id", "13");
-        obj.put("comment", "Automatisch testen door selenium door caglar");
+        obj.put("assignedto_id", "13"); //id caglar
+        obj.put("comment", "Automatisch testen met selenium & cucumber");
 
-        client.sendPost("add_result/"+testCase, obj);
+        client.sendPost("add_result_for_case/"+testRun+"/"+testCase, obj);
 
     }
+
+
     @Then("save to testrail")
     public void save() throws IOException, APIException {
         APIClient client = new APIClient("https://pxl.testrail.com/");
@@ -225,10 +234,11 @@ public class StepDefinitions {
         if(error == 0) {
             // Er is geen error
             obj.put("status_id", "1");
-            obj.put("defects", "/");
+            obj.put("defects", "");
         } else {
             // Er is een error
             obj.put("status_id", "5");
+            obj.put("defects", "");
 
         }
 
@@ -240,5 +250,29 @@ public class StepDefinitions {
         client.sendPost("add_result/6885", obj);
 
 
+    }
+
+    @Then("^I Verify That There Is A Buildings Button In The CUI$")
+    public void iVerifyThatThereIsABuildingsButtonInTheCUI() {
+        categoryButtonCUI= webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div[3]/button"));
+        Assert.assertNotNull(categoryButtonCUI);
+        if (!categoryButtonCUI.getText().equals("buildings")){
+            error=1;
+        }
+    }
+
+    @Then("^I Click On The Buildings Button In The CUI$")
+    public void iClickOnTheBuildingsButtonInTheCUI(){
+      categoryButtonCUI.click();
+    }
+
+    @Then("^I Verify That There The CUI Shows A Message With The Text:(.*)")
+    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings(String building) {
+        categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
+        Assert.assertEquals(building, categoryMessageCUI.getText());
+
+        if (!categoryMessageCUI.getText().equals(building)){
+            error=1;
+        }
     }
 }
