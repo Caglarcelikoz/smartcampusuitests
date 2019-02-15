@@ -1,7 +1,7 @@
 @Companies
 
-Feature: Companies SearchBox
-  This feature verifies that the given companies name returns the correct data in the Companies table
+Feature: Searchbox returns the correct data in the tables when the given name is present in the tables
+  This feature verifies that the given name returns the correct data in the tables
 
   Scenario Outline: Check that given building name in SearchBox returns the correct data in companies table
     Given I launch Chrome browser
@@ -16,8 +16,8 @@ Feature: Companies SearchBox
     Then add to testrun <testRun> <testCase>
     Then I close the browser window
 
-  Examples:
-  |companyName|testCase|testRun|
-  |XTi        |4007    |193    |
-  |XTi        |4007    |203    |
- # |ida mediafoundry        |4007    |203    |
+    Examples:
+      |companyName|testCase|testRun|
+      |XTi        |4007    |193    |
+      |XTi        |4007    |203    |
+ # |ida mediafoundry    |4007   |203    |

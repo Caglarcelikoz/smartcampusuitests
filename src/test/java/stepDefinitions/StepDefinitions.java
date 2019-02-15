@@ -13,6 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StepDefinitions {
     //webdrivers
@@ -25,9 +27,31 @@ public class StepDefinitions {
     WebElement companyName;
     WebElement smartCampusLogo;
     WebElement restartButton;
-    WebElement categoryButtonCUI;
+    WebElement employeesButtonCUI;
+    WebElement buildingsButtonCUI;
+    WebElement companiesButtonCUI;
     WebElement categoryMessageCUI;
+    WebElement noButtonBuildings;
+    WebElement noButtonEmployees;
+    WebElement noButtonCompanies;
+    WebElement finalMessageBuildings;
+    WebElement finalMessageEmployees;
+    WebElement finalMessageCompanies;
+    WebElement companyTableName;
+    WebElement companyTableBuilding;
+    WebElement companyTableNameColumn;
+    WebElement companyTableBuildingColumn;
+    WebElement questionMessage;
+    WebElement inputFieldCUI;
+    WebElement sendButton;
+    WebElement foundBuildingMessage;
+    String inputText;
     final String WELCOME_MESSAGE="Hi there, I'm Charlie and I can help you get to your destination!";
+    final String QUESTION_MESSAGE_BUILDING="Which building are you looking for?";
+    final String FINAL_MESSAGE="Okay, good luck!";
+    final String COMPANY_TABLE_FIRST_COLUMN_TITLE="Company name";
+    final String COMPANY_TABLE_SECOND_COLUMN_TITLE="Building";
+
     int error;
     // GENERAL
     @Given("I launch Chrome browser")
@@ -94,10 +118,12 @@ public class StepDefinitions {
     public void i_Click_the_CompaniesButton(){
         menuButton.click();
     }
+
     @Then("I verify there is a CompaniesHeader")
     public void i_Verify_There_Is_A_CompaniesHeader(){
         header = webDriver.findElement(By.id("companiesHeader"));
     }
+
     @Then("I check that the CompaniesHeader has the correct text")
     public void i_Check_That_The_companiesHeader_Has_The_Correct_Text(){
         Assert.assertEquals("Companies", header.getText());
@@ -254,16 +280,32 @@ public class StepDefinitions {
 
     @Then("^I Verify That There Is A Buildings Button In The CUI$")
     public void iVerifyThatThereIsABuildingsButtonInTheCUI() {
-        categoryButtonCUI= webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div[3]/button"));
-        Assert.assertNotNull(categoryButtonCUI);
-        if (!categoryButtonCUI.getText().equals("buildings")){
+        buildingsButtonCUI= webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div[3]/button"));
+        Assert.assertNotNull(buildingsButtonCUI);
+        if (!buildingsButtonCUI.getText().equals("buildings")){
+            error=1;
+        }
+    }
+    @Then("^I Verify That There Is A Companies Button In The CUI$")
+    public void iVerifyThatThereIsACompaniesButtonInTheCUI() {
+        companiesButtonCUI= webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div[1]/button"));
+        Assert.assertNotNull(companiesButtonCUI);
+        if (!companiesButtonCUI.getText().equals("companies")){
+            error=1;
+        }
+    }
+    @Then("^I Verify That There Is A Employees Button In The CUI$")
+    public void iVerifyThatThereIsAEmployeesButtonInTheCUI() {
+        employeesButtonCUI= webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div[2]/button"));
+        Assert.assertNotNull(employeesButtonCUI);
+        if (!employeesButtonCUI.getText().equals("employees")){
             error=1;
         }
     }
 
     @Then("^I Click On The Buildings Button In The CUI$")
     public void iClickOnTheBuildingsButtonInTheCUI(){
-      categoryButtonCUI.click();
+      buildingsButtonCUI.click();
     }
 
     @Then("^I Verify That There The CUI Shows A Message With The Text:(.*)")
@@ -274,5 +316,107 @@ public class StepDefinitions {
         if (!categoryMessageCUI.getText().equals(building)){
             error=1;
         }
+    }
+
+
+    @Then("^I Verify That The CUI Asks Which Building The User Is Looking For$")
+    public void iVerifyThatTheCUIAsksWhichBuildingTheUserIsLookingFor() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        questionMessage=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[4]/div/div[2]/div/p"));
+        Assert.assertEquals(QUESTION_MESSAGE_BUILDING,questionMessage.getText());
+        if (!QUESTION_MESSAGE_BUILDING.equals(questionMessage.getText())){
+            error=1;
+        }
+    }
+
+    @Then("^I give in BuildingName (.*) On The InputField$")
+    public void iGiveInBuildingNameOnTheInputField(String buildingName) {
+        inputFieldCUI=webDriver.findElement(By.id("inputField"));
+        inputFieldCUI.sendKeys(buildingName);
+        inputText=buildingName;
+    }
+
+    @Then("^I Verify That The CUI Shows The Correct Messages When The Given Building Name Exists$")
+    public void iVerifyThatTheCUIShowsTheCorrectMessagesWhenTheGivenBuildingNameExists() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        foundBuildingMessage=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[6]/div/div[2]/div[1]/p"));
+        Assert.assertTrue(foundBuildingMessage.getText().contains(inputText.substring(0,1).toUpperCase()));
+        if (!foundBuildingMessage.getText().contains(inputText.substring(0,1).toUpperCase())){
+            error=1;
+        }
+    }
+
+    @Then("^I Click On No Button In Buildings Flow$")
+    public void iClickOnNoButtonInBuildingsFlow() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        noButtonBuildings=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[7]/div/div[2]/div[2]/button"));
+        noButtonBuildings.click();
+    }
+
+    @Then("^I Verify That The CUI Shows A Correct Final Message In The Buildings Flow$")
+    public void iVerifyThatTheCUIShowsACorrectFinalMessageInTheBuildingsFlow() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finalMessageBuildings=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[9]/div/div[2]/div/p"));
+        Assert.assertEquals(FINAL_MESSAGE,finalMessageBuildings.getText());
+        if (!FINAL_MESSAGE.equals(finalMessageBuildings.getText())){
+            error=0;
+        }
+    }
+
+    @Then("^I Click On The Send Button$")
+    public void iClickOnTheSendButton() {
+        sendButton=webDriver.findElement(By.id("sendButton"));
+        sendButton.click();
+    }
+
+    @Then("^I verify that the correct column titles are visible in the table$")
+    public void iVerifyThatTheCorrectColumnTitlesAreVisibleInTheTable() {
+        companyTableName=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/table/thead/tr/th[1]"));
+        companyTableBuilding=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/table/thead/tr/th[2]"));
+        Assert.assertEquals(COMPANY_TABLE_FIRST_COLUMN_TITLE,companyTableName.getText());
+        Assert.assertEquals(COMPANY_TABLE_SECOND_COLUMN_TITLE,companyTableBuilding.getText());
+    }
+
+    @Then("^I verify that the table contains given companyName (.*) and the corresponding building details (.*)$")
+    public void iVerifyThatTheTableContainsGivenCompanyNameCompanyNameAndTheCorrespondingBuildingDetailsBuilding(String companyName,String building) throws InterruptedException {
+
+        companyTableNameColumn = webDriver.findElement(By.id("companyTable"));
+        List<WebElement> rowVals = companyTableNameColumn.findElements(By.tagName("tr"));
+        int colNum = webDriver.findElements(By.xpath("//table[@id='companyTable']/tbody/tr[1]/td")).size();
+        int rowNum = webDriver.findElements(By.xpath("//table[@id='companyTable']/tbody/tr")).size();
+        List<String>list=new ArrayList<>();
+        for(int i=1; i<rowNum; i++){
+            List<WebElement> colVals = rowVals.get(i).findElements(By.tagName("td"));
+            for(int j=0; j<colNum; j++){
+                list.add(colVals.get(j).getText());
+
+            }
+
+
+        }
+     //   list.forEach(System.out::println);
+          Assert.assertTrue(list.contains(companyName));
+         Assert.assertTrue(list.get(list.indexOf(companyName)+1).contains(building));
+         if (list.contains(companyName)||!list.get(list.indexOf(companyName)+1).contains(building)){
+             error=1;
+
+         }
+         Thread.sleep(1000);
     }
 }
