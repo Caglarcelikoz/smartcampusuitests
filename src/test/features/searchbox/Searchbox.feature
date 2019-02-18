@@ -10,9 +10,9 @@ Feature: Searchbox returns the correct data in the tables when the given name is
     Then I Click The CompaniesButton
     Then I verify there is a CompaniesHeader
     Then I check that the CompaniesHeader has the correct text
-    Then I verify there is a companiesSearchBox
+    When I verify there is a companiesSearchBox
     Then I give in companyName <companyName>
-    Then I verify given companyName <companyName> is in table
+    When I verify given companyName <companyName> is in table
     Then add to testrun <testRun> <testCase>
     Then I close the browser window
 
