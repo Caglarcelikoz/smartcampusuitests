@@ -46,7 +46,10 @@ public class StepDefinitions {
     WebElement inputFieldCUI;
     WebElement sendButton;
     WebElement foundBuildingMessage;
+<<<<<<< HEAD
     WebElement foundEmployeeMessage;
+=======
+>>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
     WebElement buttonToTable;
     String inputText;
     final String WELCOME_MESSAGE="Hi there, I'm Charlie and I can help you get to your destination!";
@@ -326,6 +329,7 @@ public class StepDefinitions {
         employeesButtonCUI.click();
     }
 
+<<<<<<< HEAD
 
     @Then("^I Verify That There The CUI Shows A Message With The Text buildings")
     public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings() {
@@ -333,6 +337,14 @@ public class StepDefinitions {
         Assert.assertEquals("buildings", categoryMessageCUI.getText());
 
         if (!categoryMessageCUI.getText().equals("buildings")){
+=======
+    @Then("^I Verify That There The CUI Shows A Message With The Text:(.*)")
+    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings(String text) {
+        categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
+        Assert.assertEquals(text, categoryMessageCUI.getText());
+
+        if (!categoryMessageCUI.getText().equals(text)){
+>>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
             error=1;
         }
     }
@@ -341,10 +353,13 @@ public class StepDefinitions {
         categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
         Assert.assertEquals("employees", categoryMessageCUI.getText());
 
+<<<<<<< HEAD
         if (!categoryMessageCUI.getText().equals("employees")){
             error=1;
         }
     }
+=======
+>>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
     @Then("^I Verify That The CUI Asks Which Employee The User Is Looking For$")
     public void iVerifyThatTheCUIAsksWhichEmployeeTheUserIsLookingFor() {
         try {
@@ -391,7 +406,15 @@ public class StepDefinitions {
     }
     @When("^I give in EmployeeName (.*) On The InputField$")
     public void iGiveInEmployeeNameEmployeeNameOnTheInputField(String employeeName) {
+<<<<<<< HEAD
 
+=======
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+>>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
         inputFieldCUI=webDriver.findElement(By.id("inputField"));
         inputFieldCUI.sendKeys(employeeName);
         inputText=employeeName;
@@ -537,6 +560,7 @@ public class StepDefinitions {
     }
 
 
+<<<<<<< HEAD
     @When("^I Click On No Button In Employee Flow$")
     public void iClickOnNoButtonInEmployeeFlow() {
         try {
@@ -568,4 +592,7 @@ public class StepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
+=======
+
+>>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
 }
