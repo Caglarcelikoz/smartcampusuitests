@@ -48,10 +48,13 @@ public class StepDefinitions {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     WebElement foundEmployeeMessage;
 =======
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
     WebElement buttonToTable;
+=======
+>>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
 =======
@@ -349,8 +352,12 @@ public class StepDefinitions {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (!categoryMessageCUI.getText().equals(text)){
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
+=======
+        if (!categoryMessageCUI.getText().equals(building)){
+>>>>>>> parent of 64c689c... 'tests'
 =======
         if (!categoryMessageCUI.getText().equals(building)){
 >>>>>>> parent of 64c689c... 'tests'
@@ -365,6 +372,7 @@ public class StepDefinitions {
         categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
         Assert.assertEquals("employees", categoryMessageCUI.getText());
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -391,6 +399,8 @@ public class StepDefinitions {
 >>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
+=======
+>>>>>>> parent of 64c689c... 'tests'
 
     @Then("^I Verify That The CUI Asks Which Building The User Is Looking For$")
     public void iVerifyThatTheCUIAsksWhichBuildingTheUserIsLookingFor() {
@@ -411,6 +421,7 @@ public class StepDefinitions {
         inputFieldCUI=webDriver.findElement(By.id("inputField"));
         inputFieldCUI.sendKeys(buildingName);
         inputText=buildingName;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         try {
@@ -438,6 +449,8 @@ public class StepDefinitions {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+=======
+>>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
 =======
@@ -538,6 +551,7 @@ public class StepDefinitions {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     @Then("^I Verify That The CUI Shows The Correct Messages When The Given Building Name Not Exists$")
     public void iVerifyThatTheCUIShowsTheCorrectMessagesWhenTheGivenBuildingNameNotExists()  {
@@ -611,6 +625,8 @@ public class StepDefinitions {
 =======
 
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
+=======
+>>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
 =======
