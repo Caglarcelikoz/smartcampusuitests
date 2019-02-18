@@ -46,6 +46,7 @@ Feature: Menu Buttons
     Then I close the browser window
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   Examples:
   |testCase|testRun|
   |3640    |193    |
@@ -55,5 +56,7 @@ Feature: Menu Buttons
   |3640    |203    |
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
 
+=======
+>>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
