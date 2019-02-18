@@ -10,9 +10,12 @@ Feature: The CUI returns the correct result when giving an existing building, co
     Then I Verify That There Is A Companies Button In The CUI
     Then I Verify That There Is A Employees Button In The CUI
 <<<<<<< HEAD
+<<<<<<< HEAD
     When I Click On The Buildings Button In The CUI
     Then I Verify That There The CUI Shows A Message With The Text buildings
     Then I Click On The Buildings Button In The CUI
+=======
+>>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
     Then I Click On The Buildings Button In The CUI
@@ -29,6 +32,7 @@ Feature: The CUI returns the correct result when giving an existing building, co
     Examples:
       |testCase|testRun|buildingName|
       |4564    |382    |corda1     |
+<<<<<<< HEAD
 <<<<<<< HEAD
 
   Scenario Outline: Check that the CUI returns the correct employee
@@ -53,5 +57,7 @@ Feature: The CUI returns the correct result when giving an existing building, co
       |testCase|testRun|employeeName|
       |4757    |382    |Caglar Celikoz     |
 
+=======
+>>>>>>> parent of 64c689c... 'tests'
 =======
 >>>>>>> parent of 64c689c... 'tests'
