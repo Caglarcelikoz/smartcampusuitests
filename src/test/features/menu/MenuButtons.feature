@@ -35,16 +35,17 @@ Feature: Menu Buttons
       |3642    |203    |
       |3642    |382    |
 
-  Scenario Outline: Check that  the Buildings Button directs the user to the BuildingsPage
+  Scenario: Check that main elements on Google Homepage are displayed
     Given I launch Chrome browser
     When I Open localhost
     Then I look for the BuildingButton
     Then I Click The BuildingsButton
     Then I verify there is a buildingsHeader
     Then I check that the buildingsHeader has the correct text
-    Then add to testrun <testRun> <testCase>
+    Then save to testrail
     Then I close the browser window
 
+<<<<<<< HEAD
   Examples:
   |testCase|testRun|
   |3640    |193    |
@@ -54,3 +55,5 @@ Feature: Menu Buttons
   |3640    |203    |
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
 
+=======
+>>>>>>> parent of 64c689c... 'tests'

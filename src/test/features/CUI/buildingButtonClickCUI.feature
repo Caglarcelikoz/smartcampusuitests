@@ -7,7 +7,7 @@ Feature: The CUI shows a message with the text "buildings" when clicking on buil
     When I Open localhost
     Then I Verify That The CUI Shows A Welcome Message
     Then I Verify That There Is A Buildings Button In The CUI
-    When I Click On The Buildings Button In The CUI
+    Then I Click On The Buildings Button In The CUI
     Then I Verify That There The CUI Shows A Message With The Text:buildings
     Then add to testrun <testRun> <testCase>
     Then I close the browser window

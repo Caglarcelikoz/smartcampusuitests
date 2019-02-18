@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -47,14 +46,16 @@ public class StepDefinitions {
     WebElement sendButton;
     WebElement foundBuildingMessage;
 <<<<<<< HEAD
+<<<<<<< HEAD
     WebElement foundEmployeeMessage;
 =======
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
     WebElement buttonToTable;
+=======
+>>>>>>> parent of 64c689c... 'tests'
     String inputText;
     final String WELCOME_MESSAGE="Hi there, I'm Charlie and I can help you get to your destination!";
     final String QUESTION_MESSAGE_BUILDING="Which building are you looking for?";
-    final String QUESTION_MESSAGE_EMPLOYEE="What is the first and last name of the employee you are looking for?";
     final String FINAL_MESSAGE="Okay, good luck!";
     final String COMPANY_TABLE_FIRST_COLUMN_TITLE="Company name";
     final String COMPANY_TABLE_SECOND_COLUMN_TITLE="Building";
@@ -73,7 +74,7 @@ public class StepDefinitions {
     }
     @When("I Open localhost")
     public void i_Open_Local_Host(){
-        webDriver.get("https://test.smartcampus.be");
+        webDriver.get("http://35.241.249.44");
     }
 
     // BUILDING
@@ -162,7 +163,7 @@ public class StepDefinitions {
         }
     }
 
-    @When("^I verify there is a companiesSearchBox$")
+    @Then("^I verify there is a companiesSearchBox$")
     public void iVerifyThereIsACompaniesSearchBox(){
         searchBox = webDriver.findElement(By.id("searchBarCompanies"));
     }
@@ -173,10 +174,10 @@ public class StepDefinitions {
         Thread.sleep(1000);
     }
 
-    @When("^I verify given companyName (.*) is in table$")
+    @Then("^I verify given companyName (.*) is in table$")
     public void iVerifyGivenCompanyNameCompanyNameIsInTable(String companyName){
         table = webDriver.findElement(By.id("companyTable"));
-        this.companyName =table.findElement(By.xpath("/html/body/div[1]/div[2]/table/tbody/tr[1]/td[1]"));
+        this.companyName =table.findElement(By.id("1_Name"));
         Assert.assertEquals(companyName,this.companyName.getText()); //controle voor de test
         if (!this.companyName.getText().equals(companyName)){ //controle voor testrail
             error=1;
@@ -320,7 +321,7 @@ public class StepDefinitions {
         }
     }
 
-    @When("^I Click On The Buildings Button In The CUI$")
+    @Then("^I Click On The Buildings Button In The CUI$")
     public void iClickOnTheBuildingsButtonInTheCUI(){
       buildingsButtonCUI.click();
     }
@@ -339,12 +340,16 @@ public class StepDefinitions {
         if (!categoryMessageCUI.getText().equals("buildings")){
 =======
     @Then("^I Verify That There The CUI Shows A Message With The Text:(.*)")
-    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings(String text) {
+    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings(String building) {
         categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
-        Assert.assertEquals(text, categoryMessageCUI.getText());
+        Assert.assertEquals(building, categoryMessageCUI.getText());
 
+<<<<<<< HEAD
         if (!categoryMessageCUI.getText().equals(text)){
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
+=======
+        if (!categoryMessageCUI.getText().equals(building)){
+>>>>>>> parent of 64c689c... 'tests'
             error=1;
         }
     }
@@ -353,6 +358,7 @@ public class StepDefinitions {
         categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
         Assert.assertEquals("employees", categoryMessageCUI.getText());
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         if (!categoryMessageCUI.getText().equals("employees")){
             error=1;
@@ -373,8 +379,10 @@ public class StepDefinitions {
             error=1;
         }
     }
+=======
+>>>>>>> parent of 64c689c... 'tests'
 
-    @And("^I Verify That The CUI Asks Which Building The User Is Looking For$")
+    @Then("^I Verify That The CUI Asks Which Building The User Is Looking For$")
     public void iVerifyThatTheCUIAsksWhichBuildingTheUserIsLookingFor() {
         try {
             Thread.sleep(3000);
@@ -388,16 +396,12 @@ public class StepDefinitions {
         }
     }
 
-    @When("^I give in BuildingName (.*) On The InputField$")
+    @Then("^I give in BuildingName (.*) On The InputField$")
     public void iGiveInBuildingNameOnTheInputField(String buildingName) {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         inputFieldCUI=webDriver.findElement(By.id("inputField"));
         inputFieldCUI.sendKeys(buildingName);
         inputText=buildingName;
+<<<<<<< HEAD
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -423,6 +427,8 @@ public class StepDefinitions {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+=======
+>>>>>>> parent of 64c689c... 'tests'
     }
 
     @Then("^I Verify That The CUI Shows The Correct Messages When The Given Building Name Exists$")
@@ -452,7 +458,7 @@ public class StepDefinitions {
         }
     }
 
-    @When("^I Click On No Button In Buildings Flow$")
+    @Then("^I Click On No Button In Buildings Flow$")
     public void iClickOnNoButtonInBuildingsFlow() {
         try {
             Thread.sleep(3000);
@@ -477,15 +483,10 @@ public class StepDefinitions {
         }
     }
 
-    @And("^I Click On The Send Button$")
+    @Then("^I Click On The Send Button$")
     public void iClickOnTheSendButton() {
         sendButton=webDriver.findElement(By.id("sendButton"));
         sendButton.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Then("^I verify that the correct column titles are visible in the table$")
@@ -522,6 +523,7 @@ public class StepDefinitions {
          }
          Thread.sleep(1000);
     }
+<<<<<<< HEAD
 
     @Then("^I Verify That The CUI Shows The Correct Messages When The Given Building Name Not Exists$")
     public void iVerifyThatTheCUIShowsTheCorrectMessagesWhenTheGivenBuildingNameNotExists()  {
@@ -595,4 +597,6 @@ public class StepDefinitions {
 =======
 
 >>>>>>> 64c689cb46d46efa3ae9a10224d1cec61a419b4d
+=======
+>>>>>>> parent of 64c689c... 'tests'
 }
