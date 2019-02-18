@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -45,9 +46,12 @@ public class StepDefinitions {
     WebElement inputFieldCUI;
     WebElement sendButton;
     WebElement foundBuildingMessage;
+    WebElement foundEmployeeMessage;
+    WebElement buttonToTable;
     String inputText;
     final String WELCOME_MESSAGE="Hi there, I'm Charlie and I can help you get to your destination!";
     final String QUESTION_MESSAGE_BUILDING="Which building are you looking for?";
+    final String QUESTION_MESSAGE_EMPLOYEE="What is the first and last name of the employee you are looking for?";
     final String FINAL_MESSAGE="Okay, good luck!";
     final String COMPANY_TABLE_FIRST_COLUMN_TITLE="Company name";
     final String COMPANY_TABLE_SECOND_COLUMN_TITLE="Building";
@@ -66,7 +70,7 @@ public class StepDefinitions {
     }
     @When("I Open localhost")
     public void i_Open_Local_Host(){
-        webDriver.get("http://35.241.249.44");
+        webDriver.get("https://test.smartcampus.be");
     }
 
     // BUILDING
@@ -139,8 +143,9 @@ public class StepDefinitions {
     }
 
     @Then("^I give in firstname:(.*)")
-    public void iGiveInFirstnameJaakie(String firstname) {
+    public void iGiveInFirstnameJaakie(String firstname) throws InterruptedException {
         searchBox.sendKeys(firstname);
+        Thread.sleep(2000);
     }
 
     @Then("I verify given firstname:(.*) is in table")
@@ -154,7 +159,7 @@ public class StepDefinitions {
         }
     }
 
-    @Then("^I verify there is a companiesSearchBox$")
+    @When("^I verify there is a companiesSearchBox$")
     public void iVerifyThereIsACompaniesSearchBox(){
         searchBox = webDriver.findElement(By.id("searchBarCompanies"));
     }
@@ -165,12 +170,21 @@ public class StepDefinitions {
         Thread.sleep(1000);
     }
 
-    @Then("^I verify given companyName (.*) is in table$")
+    @When("^I verify given companyName (.*) is in table$")
     public void iVerifyGivenCompanyNameCompanyNameIsInTable(String companyName){
         table = webDriver.findElement(By.id("companyTable"));
-        this.companyName =table.findElement(By.id("1_Name"));
+        this.companyName =table.findElement(By.xpath("/html/body/div[1]/div[2]/table/tbody/tr[1]/td[1]"));
         Assert.assertEquals(companyName,this.companyName.getText()); //controle voor de test
         if (!this.companyName.getText().equals(companyName)){ //controle voor testrail
+            error=1;
+        }
+    }
+    @When("^I verify given employeeName (.*) is in table$")
+    public void iVerifyGivenEmployeeNameCompanyNameIsInTable(String employeeName){
+        table = webDriver.findElement(By.id("employeeTable"));
+        this.employeeFirstname =table.findElement(By.xpath("/html/body/div[1]/div[2]/table/tbody/tr[1]/td[1]"));
+        Assert.assertEquals(employeeName,this.employeeFirstname.getText()); //controle voor de test
+        if (!this.employeeFirstname.getText().equals(employeeName)){ //controle voor testrail
             error=1;
         }
     }
@@ -188,7 +202,7 @@ public class StepDefinitions {
     @Then("^I verify that I'm redirected to the home page$")
     public void iVerifyThatIMRedirectedToTheHomePage(){
         String URL = webDriver.getCurrentUrl();
-        Assert.assertEquals(URL, "http://35.241.249.44/chatbot" );
+        Assert.assertEquals(URL, "https://test.smartcampus.be/chatbot" );
     }
 
     @Then("^I look for the restart button$")
@@ -303,23 +317,49 @@ public class StepDefinitions {
         }
     }
 
-    @Then("^I Click On The Buildings Button In The CUI$")
+    @When("^I Click On The Buildings Button In The CUI$")
     public void iClickOnTheBuildingsButtonInTheCUI(){
       buildingsButtonCUI.click();
     }
+    @When("^I Click On The Employees Button In The CUI$")
+    public void iClickOnTheEmployeesButtonInTheCUI(){
+        employeesButtonCUI.click();
+    }
 
-    @Then("^I Verify That There The CUI Shows A Message With The Text:(.*)")
-    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings(String building) {
+
+    @Then("^I Verify That There The CUI Shows A Message With The Text buildings")
+    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextBuildings() {
         categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
-        Assert.assertEquals(building, categoryMessageCUI.getText());
+        Assert.assertEquals("buildings", categoryMessageCUI.getText());
 
-        if (!categoryMessageCUI.getText().equals(building)){
+        if (!categoryMessageCUI.getText().equals("buildings")){
+            error=1;
+        }
+    }
+    @Then("^I Verify That There The CUI Shows A Message With The Text employees")
+    public void iVerifyThatThereTheCUIShowsAMessageWithTheTextEmployees() {
+        categoryMessageCUI=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[3]/div/div/p"));
+        Assert.assertEquals("employees", categoryMessageCUI.getText());
+
+        if (!categoryMessageCUI.getText().equals("employees")){
+            error=1;
+        }
+    }
+    @Then("^I Verify That The CUI Asks Which Employee The User Is Looking For$")
+    public void iVerifyThatTheCUIAsksWhichEmployeeTheUserIsLookingFor() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        questionMessage=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[4]/div/div[2]/div/p"));
+        Assert.assertEquals(QUESTION_MESSAGE_EMPLOYEE,questionMessage.getText());
+        if (!QUESTION_MESSAGE_EMPLOYEE.equals(questionMessage.getText())){
             error=1;
         }
     }
 
-
-    @Then("^I Verify That The CUI Asks Which Building The User Is Looking For$")
+    @And("^I Verify That The CUI Asks Which Building The User Is Looking For$")
     public void iVerifyThatTheCUIAsksWhichBuildingTheUserIsLookingFor() {
         try {
             Thread.sleep(3000);
@@ -333,11 +373,33 @@ public class StepDefinitions {
         }
     }
 
-    @Then("^I give in BuildingName (.*) On The InputField$")
+    @When("^I give in BuildingName (.*) On The InputField$")
     public void iGiveInBuildingNameOnTheInputField(String buildingName) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         inputFieldCUI=webDriver.findElement(By.id("inputField"));
         inputFieldCUI.sendKeys(buildingName);
         inputText=buildingName;
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @When("^I give in EmployeeName (.*) On The InputField$")
+    public void iGiveInEmployeeNameEmployeeNameOnTheInputField(String employeeName) {
+
+        inputFieldCUI=webDriver.findElement(By.id("inputField"));
+        inputFieldCUI.sendKeys(employeeName);
+        inputText=employeeName;
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("^I Verify That The CUI Shows The Correct Messages When The Given Building Name Exists$")
@@ -353,8 +415,21 @@ public class StepDefinitions {
             error=1;
         }
     }
+    @Then("^I Verify That The CUI Shows The Correct Messages When The Given Employee Name Exists$")
+    public void iVerifyThatTheCUIShowsTheCorrectMessagesWhenTheGivenEmployeeNameExists() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        foundEmployeeMessage=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[6]/div/div[2]/div[1]/p"));
+        Assert.assertTrue(foundEmployeeMessage.getText().contains("You selected"));
+        if (!foundEmployeeMessage.getText().contains("You selected")){
+            error=1;
+        }
+    }
 
-    @Then("^I Click On No Button In Buildings Flow$")
+    @When("^I Click On No Button In Buildings Flow$")
     public void iClickOnNoButtonInBuildingsFlow() {
         try {
             Thread.sleep(3000);
@@ -379,10 +454,15 @@ public class StepDefinitions {
         }
     }
 
-    @Then("^I Click On The Send Button$")
+    @And("^I Click On The Send Button$")
     public void iClickOnTheSendButton() {
         sendButton=webDriver.findElement(By.id("sendButton"));
         sendButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("^I verify that the correct column titles are visible in the table$")
@@ -418,5 +498,74 @@ public class StepDefinitions {
 
          }
          Thread.sleep(1000);
+    }
+
+    @Then("^I Verify That The CUI Shows The Correct Messages When The Given Building Name Not Exists$")
+    public void iVerifyThatTheCUIShowsTheCorrectMessagesWhenTheGivenBuildingNameNotExists()  {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        foundBuildingMessage=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[6]/div/div[2]/div[1]/p"));
+        Assert.assertTrue(foundBuildingMessage.getText().contains("I could not find a building with the name"));
+        if (!foundBuildingMessage.getText().contains(inputText.substring(0,1).toUpperCase())){
+            error=1;
+        }
+    }
+
+    @When("^I Click On The Buildings Button To Check The Table With All Buildings$")
+    public void iClickOnTheBuildingsButtonToCheckTheTableWithAllBuildings() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        buttonToTable = webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[7]/div/div[2]/div/a"));
+        buttonToTable.click();
+
+    }
+
+    @Then("^I Verify That The Buildings Page Is Opened$")
+    public void iVerifyThatTheBuildingsPageIsOpened() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+       header=webDriver.findElement(By.id("buildingsHeader"));
+    }
+
+
+    @When("^I Click On No Button In Employee Flow$")
+    public void iClickOnNoButtonInEmployeeFlow() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        noButtonEmployees=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[7]/div/div[2]/div[2]/button"));
+        noButtonEmployees.click();
+    }
+
+    @Then("^I Verify That The CUI Shows A Correct Final Message In The Employee Flow$")
+    public void iVerifyThatTheCUIShowsACorrectFinalMessageInTheEmployeeFlow(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finalMessageEmployees=webDriver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div/div/div[9]/div/div[2]/div/p"));
+        Assert.assertEquals(FINAL_MESSAGE,finalMessageEmployees.getText());
+        if (!FINAL_MESSAGE.equals(finalMessageEmployees.getText())){
+            error=0;
+        }
+    }
+
+
+    @Then("^I give in employeeName <employeeName>$")
+    public void iGiveInEmployeeNameEmployeeName() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 }

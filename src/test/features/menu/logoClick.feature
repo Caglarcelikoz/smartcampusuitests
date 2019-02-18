@@ -2,7 +2,7 @@
 Feature: logo click
   This feature verifies that clicking the logo directs the user to the Home page
 
-  Scenario: Check that Homepage are displayed
+  Scenario Outline: Check that Homepage are displayed
     Given I launch Chrome browser
     When I Open localhost
     Then I look for the Smart Campus logo
@@ -13,5 +13,6 @@ Feature: logo click
 
     Examples:
       |testCase|testRun|
-      |4007    |193    |
-      |4007    |203    |
+      |3691    |193    |
+      |3691    |203    |
+      |3691    |382    |

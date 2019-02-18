@@ -1,4 +1,4 @@
-@Companies
+@Tables
 
 Feature: A Table returns the correct data in the table when the page id opened
   This feature verifies that the employees, buildings and companies tables return the correct data in the table when the page id opened
